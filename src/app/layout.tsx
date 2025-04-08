@@ -23,7 +23,7 @@ export default function RootLayout({
         <AppProvider>
           <Header />
           {children}
-          <Toaster />
+          <Toaster richColors />
         </AppProvider>
       </body>
     </html>

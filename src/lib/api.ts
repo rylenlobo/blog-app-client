@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://blog-app-server-oyzn.onrender.com/api",
   withCredentials: true // Needed for refresh token cookie
 });
 
@@ -38,7 +38,7 @@ api.interceptors.response.use(
 
       isRefreshing = true;
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/refresh", {
+        const res = await api.post("/auth/refresh", {
           withCredentials: true
         });
         const newToken = res.data.accessToken;

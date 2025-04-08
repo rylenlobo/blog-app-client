@@ -24,6 +24,7 @@ export interface MinimalTiptapProps
   onChange?: (value: Content) => void;
   className?: string;
   editorContentClassName?: string;
+  editable?: boolean;
 }
 
 export const JSONContentSchema: z.ZodType<JSONContent> = z.lazy(
