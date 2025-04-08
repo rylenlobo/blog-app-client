@@ -1,103 +1,133 @@
-import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { MessageCircle, Heart, ArrowRight } from "lucide-react";
+
+// data/blogPosts.ts
+
+export const blogPosts = [
+  {
+    title: "React Hooks Explained",
+    author: "Carol White",
+    date: "March 12, 2025",
+    summary:
+      "A comprehensive guide to React Hooks and how to use them effectively in your projects.",
+    likes: 22,
+    comments: 10
+  },
+  {
+    title: "Please Start Writing Better Git Commits",
+    author: "Travis Aaron Wagner",
+    date: "July 29, 2022",
+    summary:
+      "Learn why clear commit messages matter and how to write ones your team will love.",
+    likes: 45,
+    comments: 19
+  },
+  {
+    title: "JavaScript Array Methods You Should Know",
+    author: "Leah Kim",
+    date: "February 15, 2025",
+    summary:
+      "An overview of powerful JavaScript array methods that can simplify your code.",
+    likes: 18,
+    comments: 7
+  },
+  {
+    title: "Understanding Flexbox Once and For All",
+    author: "Mohit Sharma",
+    date: "April 1, 2025",
+    summary:
+      "Still confused by Flexbox? This visual guide will help it finally click.",
+    likes: 34,
+    comments: 12
+  },
+  {
+    title: "How to Build a Blog with Next.js and MDX",
+    author: "Nina Patel",
+    date: "March 30, 2025",
+    summary:
+      "Step-by-step guide to building a markdown-powered blog using Next.js and MDX.",
+    likes: 50,
+    comments: 24
+  }
+];
+
+interface BlogCardProps {
+  title: string;
+  author: string;
+  date: string;
+  summary: string;
+  likes: number;
+  comments: number;
+}
+
+function BlogCard({
+  title,
+  author,
+  date,
+  summary,
+  likes,
+  comments
+}: BlogCardProps) {
+  return (
+    <Card className="group w-full max-w-xl mx-auto rounded-sm shadow-xs border-1 border-border  px-0 pb-0 bg-background">
+      <CardContent className=" flex flex-col gap-2 px-0 group-hover:shadow-sm transition duration-200 ease-in-out">
+        <div className="px-5">
+          <div className="text-sm  flex flex-col sm:flex-row sm:justify-between">
+            <div>
+              <h2 className="text-lg sm:text-xl font-semibold">{title}</h2>
+              <span className="text-sm font-semibold text-muted-foreground">
+                By {author}
+              </span>
+            </div>
+            <span className="text-muted-foreground mt-2 md:mt-0 text-xs md:text-sm">
+              {date}
+            </span>
+          </div>
+
+          <p className="text-muted-foreground text-sm leading-relaxed mt-3">
+            {summary}
+          </p>
+        </div>
+
+        <div className="flex items-center justify-between mt-2 border-t-1 px-5 py-3">
+          <div className="flex gap-4 text-sm text-muted-foreground items-center">
+            <div className="flex items-center gap-1">
+              <Heart className="w-4 h-4" />
+              {likes}
+            </div>
+            <div className="flex items-center gap-1">
+              <MessageCircle className="w-4 h-4" />
+              {comments}
+            </div>
+          </div>
+
+          {/* Mobile: text link */}
+          <span className="sm:hidden text-sm text-blue-600 font-medium">
+            Read more
+          </span>
+
+          {/* Desktop: button */}
+          <Button
+            variant="outline"
+            size="sm"
+            className="hidden sm:flex items-center text-xs gap-2 rounded-full border-primary text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+          >
+            Read Article
+            <ArrowRight className="w-3 h-3" />
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div className="pt-22 p-4 grid gap-3">
+      {blogPosts.map((post, index) => (
+        <BlogCard key={index} {...post} />
+      ))}
     </div>
   );
 }
